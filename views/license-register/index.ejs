@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>License Register</title>
+      <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="body">
+<main class="main">
+    <section class="section">
+        <div class="container">
+            <h1 class="heading">License Register</h1>
+
+            <div class="actions-header">
+                <a class="btn btn-new" href="/license-register/new">+ New License</a>
+                <a class="btn link-back" href="/dashboard">← Back to Dashboard</a>
+            </div>
+
+            <br/><br/><br/>
+
+            <% if (items.length === 0) { %>
+                <p>No licenses found. <a class="link" href="/license-register/new">Create one now.</a></p>
+            <% } else { %>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="table-header">Name of Entity</th>
+                        <th class="table-header">License Number</th>
+                        <th class="table-header">Date of Issue</th>
+                        <th class="table-header">Website</th>
+                        <th class="table-header">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% items.forEach(item => { %>
+                        <tr>
+                            <td class="table-cell"><%= item.nameOfEntity %></td>
+                            <td class="table-cell"><%= item.licenseNumber %></td>
+                            <td class="table-cell"><%= item.dateOfIssue.toISOString().substring(0,10) %></td>
+                            <td class="table-cell"><a class="link" href="<%= item.website %>" target="_blank"><%= item.website %></a></td>
+                            <td class="actions">
+                                <a href="/license-register/<%= item._id %>/edit" class="btn btn-edit">Edit</a>
+                                <form
+                                        class="delete-form"
+                                        action="/license-register/<%= item._id %>?_method=DELETE"
+                                        method="POST"
+                                        onsubmit="return confirm('Delete this license entry?');"
+                                >
+                                    <button type="submit" class="btn btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>

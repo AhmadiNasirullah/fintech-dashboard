@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Create New License</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="body">
+
+<main class="main">
+    <div class="container">
+        <h1 class="heading">Create New License</h1>
+
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form action="/license-register" method="POST">
+            <label for="nameOfEntity" class="form-label">Name of Entity</label>
+            <input
+                type="text"
+                id="nameOfEntity"
+                name="nameOfEntity"
+                class="form-input"
+                required
+                value="<%= item.nameOfEntity || '' %>"
+            />
+
+            <label for="licenseNumber" class="form-label">License Number</label>
+            <input
+                type="text"
+                id="licenseNumber"
+                name="licenseNumber"
+                class="form-input"
+                required
+                value="<%= item.licenseNumber || '' %>"
+            />
+
+            <label for="dateOfIssue" class="form-label">Date of Issue</label>
+            <input
+                type="date"
+                id="dateOfIssue"
+                name="dateOfIssue"
+                class="form-input"
+                required
+                value="<%= item.dateOfIssue ? item.dateOfIssue.substring(0,10) : '' %>"
+            />
+
+            <label for="website" class="form-label">Website</label>
+            <input
+                type="url"
+                id="website"
+                name="website"
+                class="form-input"
+                required
+                value="<%= item.website || '' %>"
+            />
+
+            <button type="submit" class="btn-submit">Create License</button>
+        </form>
+
+        <a class="link-cancel" href="/license-register">← Cancel</a>
+    </div>
+</main>
+
+</body>
+
+</html>

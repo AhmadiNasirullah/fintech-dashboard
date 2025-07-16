@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="body">
+<div class="login-container">
+    <div class="login-content">
+        <h2 class="login-title">Login</h2>
+
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form class="login-form" action="/login" method="POST">
+            <div class="input-group">
+                <label for="emailOrUsername" class="input-label">Email or Username</label>
+                <input
+                        type="text"
+                        id="emailOrUsername"
+                        name="emailOrUsername"
+                        class="input-field"
+                        required
+                        autofocus
+                />
+            </div>
+
+            <div class="input-group">
+                <label for="password" class="input-label">Password</label>
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="input-field"
+                        required
+                />
+            </div>
+
+            <button type="submit" class="btn-login">Log In</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
