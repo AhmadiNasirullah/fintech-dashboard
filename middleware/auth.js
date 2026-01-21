@@ -17,7 +17,8 @@ module.exports = function (req, res, next) {
         // Attach user info to req.user
         req.user = {
             id: decoded.id,
-            username: decoded.username
+            username: decoded.username,
+            role: decoded.role
         };
         return next();
     } catch (err) {

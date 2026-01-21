@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="body">
-    <%- include('partials/header') %>
 
-  <main class="main">
+<main class="main">
     <section class="section">
-      <div class="container">
-        <div class="welcome">Welcome, <%= username %>!</div>
-        <p class="info-text">This is a protected page. Only logged-in users can see this.</p>
-        <a href="/license-register" class="card-link">License Register →</a>
-        <a href="/logout" class="logout">Logout</a>
-      </div>
+        <div class="container dashboard-container">
+            <div class="welcome">Welcome, <span class="admin-name"><%= username %></span>!</div>
+            <p class="info-text">This is a protected page. Only logged-in users can see this.</p>
+            <div class="dashboard-actions">
+                <a href="/license-register" class="card-link"><i class="fas fa-list"></i> License Register →</a>
+                <a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
     </section>
-  </main>
-    
-    <%- include('partials/footer') %>
-
+</main>
 </body>
 </html>

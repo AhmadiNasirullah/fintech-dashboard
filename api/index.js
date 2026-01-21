@@ -24,10 +24,7 @@ app.use(cookieParser());
 app.use(methodOverride('_method')); // ← so ?_method=PUT/DELETE works
 
 mongoose
-    .connect(process.env.MONGO_URI, {
-        useNewUrlParser:    true,
-        useUnifiedTopology: true
-    })
+    .connect(process.env.MONGO_URI)
     .then(() => console.log('✅ Connected to MongoDB'))
     .catch(err => {
         console.error('❌ MongoDB connection error:', err);

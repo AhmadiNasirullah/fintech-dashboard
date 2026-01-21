@@ -2,65 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New License</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="body">
 
 <main class="main">
-    <div class="container">
-        <h1 class="heading">Create New License</h1>
+    <section class="section">
+        <div class="container new-container">
+            <a class="link-cancel" href="/license-register"><i class="fas fa-times"></i> Cancel</a>
 
-        <% if (error) { %>
-            <div class="error-message"><%= error %></div>
-        <% } %>
+            <h1 class="heading">Create New License</h1>
 
-        <form action="/license-register" method="POST">
-            <label for="nameOfEntity" class="form-label">Name of Entity</label>
-            <input
-                type="text"
-                id="nameOfEntity"
-                name="nameOfEntity"
-                class="form-input"
-                required
-                value="<%= item.nameOfEntity || '' %>"
-            />
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
 
-            <label for="licenseNumber" class="form-label">License Number</label>
-            <input
-                type="text"
-                id="licenseNumber"
-                name="licenseNumber"
-                class="form-input"
-                required
-                value="<%= item.licenseNumber || '' %>"
-            />
+            <form action="/license-register" method="POST">
+                <label for="nameOfEntity" class="form-label">Name of Entity</label>
+                <input
+                        type="text"
+                        id="nameOfEntity"
+                        name="nameOfEntity"
+                        class="form-input"
+                        required
+                        value="<%= item.nameOfEntity || '' %>"
+                />
 
-            <label for="dateOfIssue" class="form-label">Date of Issue</label>
-            <input
-                type="date"
-                id="dateOfIssue"
-                name="dateOfIssue"
-                class="form-input"
-                required
-                value="<%= item.dateOfIssue ? item.dateOfIssue.substring(0,10) : '' %>"
-            />
+                <label for="licenseNumber" class="form-label">License Number</label>
+                <input
+                        type="text"
+                        id="licenseNumber"
+                        name="licenseNumber"
+                        class="form-input"
+                        required
+                        value="<%= item.licenseNumber || '' %>"
+                />
 
-            <label for="website" class="form-label">Website</label>
-            <input
-                type="url"
-                id="website"
-                name="website"
-                class="form-input"
-                required
-                value="<%= item.website || '' %>"
-            />
+                <label for="dateOfIssue" class="form-label">Date of Issue</label>
+                <input
+                        type="date"
+                        id="dateOfIssue"
+                        name="dateOfIssue"
+                        class="form-input"
+                        required
+                        value="<%= item.dateOfIssue ? item.dateOfIssue.substring(0,10) : '' %>"
+                />
 
-            <button type="submit" class="btn-submit">Create License</button>
-        </form>
+                <label for="website" class="form-label">Website</label>
+                <input
+                        type="url"
+                        id="website"
+                        name="website"
+                        class="form-input"
+                        required
+                        value="<%= item.website || '' %>"
+                />
 
-        <a class="link-cancel" href="/license-register">← Cancel</a>
-    </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Create License</button>
+            </form>
+
+        </div>
+    </section>
 </main>
 
 </body>

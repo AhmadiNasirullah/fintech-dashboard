@@ -2,9 +2,10 @@ const express = require('express');
 const router  = express.Router();
 const LicenseRegister = require('../models/licenseRegisterSchema');
 const authMiddleware = require('../middleware/auth');
+const adminMiddleware = require('../middleware/admin');
 
-// GET /license-register (no auth required) - Rendered list
-router.get('/', async (req, res) => {
+// GET /license-register - Rendered list
+router.get('/', authMiddleware, adminMiddleware, async (req, res) => {
     try {
         const items = await LicenseRegister.find().sort({ createdAt: -1 });
         res.render('license-register/index', { items });
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET /license-register/new - Render form
-router.get('/new', (req, res) => {
+router.get('/new', authMiddleware, adminMiddleware, (req, res) => {
     res.render('license-register/new', { item: {}, error: null });
 });
 
@@ -30,7 +31,7 @@ router.get('/api', async (req, res) => {
 });
 
 // POST /license-register - Add new license
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
     const { nameOfEntity, licenseNumber, dateOfIssue, website } = req.body;
 
     if (!nameOfEntity || !licenseNumber || !dateOfIssue || !website) {
@@ -57,7 +58,7 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 // GET /license-register/:id/edit - Edit license form
-router.get('/:id/edit', authMiddleware, async (req, res) => {
+router.get('/:id/edit', authMiddleware, adminMiddleware, async (req, res) => {
     try {
         const doc = await LicenseRegister.findById(req.params.id);
         if (!doc) return res.status(404).send('Not found');
@@ -68,7 +69,7 @@ router.get('/:id/edit', authMiddleware, async (req, res) => {
 });
 
 // PUT /license-register/:id - Update license
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     const { nameOfEntity, licenseNumber, dateOfIssue, website } = req.body;
 
     if (!nameOfEntity || !licenseNumber || !dateOfIssue || !website) {
@@ -97,7 +98,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 });
 
 // DELETE /license-register/:id - Delete license
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     try {
         await LicenseRegister.findByIdAndDelete(req.params.id);
         res.redirect('/license-register');

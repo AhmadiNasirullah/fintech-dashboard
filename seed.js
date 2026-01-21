@@ -14,15 +14,17 @@ async function seed() {
     try {
         // 1. Choose credentials for your “pre-defined” user
         const username = 'admin';
-        const email = 'alice@example.com';
-        const plainPassword = 'MySecretPass'; // ← change this to whatever you want
+        const email = 'admin@moheligaminglicense.com';
+        const plainPassword = 'moheligaminglicense@132'; // ← change this to whatever you want
 
         // 2. Check if that user already exists
         const existing = await User.findOne({
             $or: [{ username }, { email }]
         });
         if (existing) {
-            console.log('User already exists:', existing.username);
+            console.log('User already exists, updating role to admin');
+            existing.role = 'admin';
+            await existing.save();
             await mongoose.disconnect();
             return;
         }
@@ -35,7 +37,8 @@ async function seed() {
         const newUser = new User({
             username,
             email,
-            passwordHash: hash
+            passwordHash: hash,
+            role: 'admin'
         });
         await newUser.save();
         console.log('✅ Seeded user:', username);

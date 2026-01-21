@@ -15,8 +15,13 @@ router.get('/login', (req, res) => {
     const token = req.cookies.token;
     if (token) {
         try {
-            jwt.verify(token, JWT_SECRET);
-            return res.redirect('/dashboard');
+            const decoded = jwt.verify(token, JWT_SECRET);
+            if (decoded.role === 'admin') {
+                return res.redirect('/dashboard');
+            } else {
+                // Not admin, clear cookie
+                res.clearCookie('token');
+            }
         } catch {
             // If token is invalid/expired, clear it and render login below
             res.clearCookie('token');
@@ -53,7 +58,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Credentials valid → sign JWT
-        const payload = { id: user._id, username: user.username };
+        const payload = { id: user._id, username: user.username, role: user.role };
         const token = jwt.sign(payload, JWT_SECRET, {
             expiresIn: JWT_EXPIRES_IN
         });
