@@ -5,12 +5,21 @@ const mongoose       = require('mongoose');
 const cookieParser   = require('cookie-parser');
 const methodOverride = require('method-override');
 const path           = require('path');
+const cors           = require('cors');
 
 const authRoutes      = require('../routes/auth');
 const dashboardRoute  = require('../routes/dashboard');
 const licenseRegisterRoute  = require('../routes/licenseRegisterRoute');
 
 const app = express();
+
+// CORS configuration - allow your frontend domain
+app.use(cors({
+  origin: true, // reflect request origin — allows any origin while keeping credentials
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views')); // Look one level up for views

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - List Tables</title>
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Database Tables List</h1>
+    <button id="fetchTables">Fetch Tables</button>
+    <ul id="tablesList"></ul>
+
+    <script>
+        document.getElementById('fetchTables').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/license-register/api');
+                const data = await response.json();
+                const list = document.getElementById('tablesList');
+                list.innerHTML = '';
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.nameOfEntity} - ${item.licenseNumber}`;
+                    list.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching tables:', error);
+                alert('Error fetching tables');
+            }
+        });
+    </script>
+</body>
+</html>
